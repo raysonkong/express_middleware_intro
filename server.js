@@ -10,28 +10,28 @@ const port = 3000;
 // Write your own middleware
 function validateUser(req, res, next) {
     // Do stuff to validate res
-
-
     // Pretend that validation is done
-    res.locals.validated = true;
+
+    // You can set a variable of any name
+    res.locals.iCanSetWhateverVariableIWant = true;
     console.log("Validated Ran!")
     next(); // Hand control to next middleware
 }
 
 
-// Specify routes that would run middleware
+//You can Specify routes that would run middleware, or not specify
 // So app.use is just like app.get, app.post ......
 app.use('/admin', validateUser);
 
 
 app.get("/",(req, res, next) => {
     res.send("<h1>Main Page</h1>");
-    console.log(res.locals.validated)
+    console.log("The res.locals variable: " + res.locals.iCanSetWhateverVariableIWant)
 })
 
-app.post("/admin",(req, res, next) => {
+app.get("/admin",(req, res, next) => {
     res.send("<h1>This is Admin page</h1>");
-    console.log(res.locals.validated)
+    console.log("The res.locals variable: " + res.locals.iCanSetWhateverVariableIWant)
 })
 
 app.listen(port, () => console.log(`App is running on ${port}`))
